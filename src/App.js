@@ -8,6 +8,12 @@ Auth.configure(awsconfig)
 API.configure(awsconfig)
 
 function App() {
+
+  const allTodos = API.graphql(graphqlOperation(queries.listTodos));
+  console.log(allTodos);
+
+  const oneTodo = API.graphql(graphqlOperation(queries.getTodo, {id:"70150cf3-a283-4d8f-9e11-931fd9603edf"}));
+  console.log(oneTodo);
   return (
     <div className="App">
       <header className="App-header">
