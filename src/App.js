@@ -1,9 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import Auth from "aws-amplify";
+import { Auth, API, graphqlOperation } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { withAuthenticator } from "aws-amplify-react";
+import * as queries from "./graphql/queries";
 Auth.configure(awsconfig)
+API.configure(awsconfig)
 
 function App() {
   return (
