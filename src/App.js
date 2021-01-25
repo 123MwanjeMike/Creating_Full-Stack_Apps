@@ -8,6 +8,17 @@ import * as mutations from "./graphql/mutations";
 Auth.configure(awsconfig);
 API.configure(awsconfig);
 
+function updateTodo(todo, newDesc) {
+  todo["description"] = newDesc;
+  API.graphql(graphqlOperation(mutations.updateTodo, { input: todo }));
+}
+
+function deleteTodo(todo) {
+  API.graphql(
+    graphqlOperation(mutations.deleteTodo, { input: { id: todo["id"] } })
+  );
+}
+
 function App() {
   const allTodos = API.graphql(graphqlOperation(queries.listTodos));
   console.log(allTodos);
@@ -16,20 +27,23 @@ function App() {
     graphqlOperation(queries.getTodo, {
       id: "70150cf3-a283-4d8f-9e11-931fd9603edf",
     })
-  );
+  ).then(function(todo) {
+    //   updateTodo(todo['data']['getTodo'], "new description")
+      deleteTodo(todo['data']['getTodo'])
+  });
   console.log(oneTodo);
 
-  Auth.currentAuthenticatedUser({
-    bypassCache: false,
-  })
-    .then(function (user) {
-      console.log("User: " + JSON.stringify(user));
-      const todo = { name: user["username"], description: "new todo" };
-      const newTodos = API.graphql(
-        graphqlOperation(mutations.createTodo, { input: todo })
-      );
-    })
-    .catch((err) => console.log(err));
+//   Auth.currentAuthenticatedUser({
+//     bypassCache: false,
+//   })
+//     .then(function (user) {
+//       console.log("User: " + JSON.stringify(user));
+//       const todo = { name: user["username"], description: "new todo" };
+//       const newTodos = API.graphql(
+//         graphqlOperation(mutations.createTodo, { input: todo })
+//       );
+//     })
+//     .catch((err) => console.log(err));
 
   return (
     <div className="App">
