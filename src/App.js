@@ -20,6 +20,11 @@ function deleteTodo(todo) {
 }
 
 function App() {
+  const userTodos =  API.graphql(
+    graphqlOperation(queries.listTodos, {filter: { 'name': { eq: "test" } }})
+  );
+  console.log(userTodos);
+
   const allTodos = API.graphql(graphqlOperation(queries.listTodos));
   console.log(allTodos);
 
@@ -27,23 +32,23 @@ function App() {
     graphqlOperation(queries.getTodo, {
       id: "70150cf3-a283-4d8f-9e11-931fd9603edf",
     })
-  ).then(function(todo) {
+  ).then(function (todo) {
     //   updateTodo(todo['data']['getTodo'], "new description")
-      deleteTodo(todo['data']['getTodo'])
+    deleteTodo(todo["data"]["getTodo"]);
   });
   console.log(oneTodo);
 
-//   Auth.currentAuthenticatedUser({
-//     bypassCache: false,
-//   })
-//     .then(function (user) {
-//       console.log("User: " + JSON.stringify(user));
-//       const todo = { name: user["username"], description: "new todo" };
-//       const newTodos = API.graphql(
-//         graphqlOperation(mutations.createTodo, { input: todo })
-//       );
-//     })
-//     .catch((err) => console.log(err));
+  //   Auth.currentAuthenticatedUser({
+  //     bypassCache: false,
+  //   })
+  //     .then(function (user) {
+  //       console.log("User: " + JSON.stringify(user));
+  //       const todo = { name: user["username"], description: "new todo" };
+  //       const newTodos = API.graphql(
+  //         graphqlOperation(mutations.createTodo, { input: todo })
+  //       );
+  //     })
+  //     .catch((err) => console.log(err));
 
   return (
     <div className="App">
