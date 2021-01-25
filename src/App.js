@@ -33,8 +33,8 @@ function App() {
       id: "70150cf3-a283-4d8f-9e11-931fd9603edf",
     })
   ).then(function (todo) {
-    //   updateTodo(todo['data']['getTodo'], "new description")
-    deleteTodo(todo["data"]["getTodo"]);
+    // updateTodo(todo['data']['getTodo'], "new description")
+    // deleteTodo(todo["data"]["getTodo"]);
   });
   console.log(oneTodo);
 
