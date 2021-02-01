@@ -1,3 +1,7 @@
+# AWS and React: Creating Full-Stack Apps
+
+This project was generated during the [React.js Essential Training](https://www.linkedin.com/learning/aws-and-react-creating-full-stack-apps) course code-along
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
